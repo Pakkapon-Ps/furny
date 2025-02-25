@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/Pakkapon-Ps/furny.git/static/css/main.aafef208.css",
-    "main.js": "/Pakkapon-Ps/furny.git/static/js/main.fa4601ea.js",
-    "static/js/453.ed3810f9.chunk.js": "/Pakkapon-Ps/furny.git/static/js/453.ed3810f9.chunk.js",
-    "static/media/loading.gif": "/Pakkapon-Ps/furny.git/static/media/loading.e4981000cdc0ae7fe49a.gif",
-    "index.html": "/Pakkapon-Ps/furny.git/index.html",
-    "main.aafef208.css.map": "/Pakkapon-Ps/furny.git/static/css/main.aafef208.css.map",
-    "main.fa4601ea.js.map": "/Pakkapon-Ps/furny.git/static/js/main.fa4601ea.js.map",
-    "453.ed3810f9.chunk.js.map": "/Pakkapon-Ps/furny.git/static/js/453.ed3810f9.chunk.js.map"
+    "main.css": "/furny/static/css/main.aafef208.css",
+    "main.js": "/furny/static/js/main.63a0a6bb.js",
+    "static/js/453.ed3810f9.chunk.js": "/furny/static/js/453.ed3810f9.chunk.js",
+    "static/media/loading.gif": "/furny/static/media/loading.e4981000cdc0ae7fe49a.gif",
+    "index.html": "/furny/index.html",
+    "main.aafef208.css.map": "/furny/static/css/main.aafef208.css.map",
+    "main.63a0a6bb.js.map": "/furny/static/js/main.63a0a6bb.js.map",
+    "453.ed3810f9.chunk.js.map": "/furny/static/js/453.ed3810f9.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.aafef208.css",
-    "static/js/main.fa4601ea.js"
+    "static/js/main.63a0a6bb.js"
   ]
 }
