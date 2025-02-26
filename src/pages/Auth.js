@@ -35,7 +35,7 @@ function Auth({ user, setUser }) {
           <input type="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)} required />
           <input type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} required />
           <button type="submit">{isSignUp ? "Sign Up" : "Login"}</button>
-          <p onClick={() => setIsSignUp(!isSignUp)} style={{ cursor: "pointer", color: "blue" }}>
+          <p onClick={() => setIsSignUp(!isSignUp)} style={{ cursor: "pointer", color: "white" }}>
             {isSignUp ? "Already have an account? Login" : "Don't have an account? Sign Up"}
           </p>
         </form>

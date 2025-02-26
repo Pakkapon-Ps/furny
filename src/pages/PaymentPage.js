@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import "./PaymentPage.css"; // นำเข้าไฟล์ CSS
+import { db, collection, addDoc } from "../firebase/firebaseConfig"; // นำเข้า addDoc
+import "./PaymentPage.css";
 
 function PaymentPage() {
   const location = useLocation();
@@ -12,30 +13,52 @@ function PaymentPage() {
     setCardNumber(e.target.value);
   };
 
-  const handleSubmitPayment = (e) => {
+  const handleSubmitPayment = async (e) => {
     e.preventDefault();
-    // ส่งข้อมูลไปยังหน้า TrackingPage
-    alert(`Payment processed with card number: ${cardNumber}`);
-    navigate("/tracking"); // ไปยังหน้า TrackingPage หลังจากการชำระเงิน
+
+    // สร้างข้อมูลคำสั่งซื้อที่ต้องการบันทึก
+    const orderData = {
+      items: cart.map((item) => ({
+        name: item.name,
+        price: item.price,
+        quantity: item.quantity,
+      })),
+      total: cart.reduce((total, item) => total + item.price * item.quantity, 0),
+      paymentStatus: "Paid", // แสดงสถานะการชำระเงิน
+      paymentMethod: "Credit Card", // หรือ QR Code, หรือวิธีอื่นๆ
+      cardNumber: cardNumber, // จะเก็บหมายเลขบัตรเครดิต
+      createdAt: new Date(),
+    };
+
+    try {
+      // บันทึกคำสั่งซื้อไปยัง Firestore
+      const docRef = await addDoc(collection(db, "orders"), orderData);
+      console.log("Order added with ID: ", docRef.id);
+
+      // แสดงข้อความหรือไปยังหน้าต่างการติดตามคำสั่งซื้อ
+      alert("Payment processed successfully!");
+      navigate("/tracking"); // ไปยังหน้า TrackingPage หลังจากการชำระเงิน
+    } catch (error) {
+      console.error("Error adding document: ", error);
+      alert("Something went wrong. Please try again.");
+    }
   };
 
   return (
     <div className="payment-page-container">
       <h2>Payment</h2>
-      
+
       <div className="qr-code-section">
         <h3>Scan QR Code to Pay</h3>
-        {/* ใช้รูปภาพ QR Code */}
-        <img 
-          src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Rickrolling_QR_code.png" 
-          alt="QR Code for Payment" 
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Rickrolling_QR_code.png"
+          alt="QR Code for Payment"
           className="qr-code"
         />
       </div>
 
       <div className="card-input-section">
         <h3>Or enter your card number</h3>
-        {/* ฟอร์มกรอกหมายเลขบัตรเครดิต */}
         <form onSubmit={handleSubmitPayment}>
           <input
             type="text"
@@ -59,6 +82,7 @@ function PaymentPage() {
             </li>
           ))}
         </ul>
+        <p>Total: ${cart.reduce((total, item) => total + item.price * item.quantity, 0)}</p>
       </div>
     </div>
   );

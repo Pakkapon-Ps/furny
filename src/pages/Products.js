@@ -6,10 +6,18 @@ import './Products.css';
 
 function Products({ cart, setCart }) {
   const [products, setProducts] = useState([]);
-  const [quantity, setQuantity] = useState(1);
+  const [quantityByProduct, setQuantityByProduct] = useState({}); // สร้าง state เพื่อเก็บ quantity สำหรับแต่ละสินค้า
   const navigate = useNavigate();
 
+  const handleQuantityChange = (productId, quantity) => {
+    setQuantityByProduct((prevState) => ({
+      ...prevState,
+      [productId]: quantity
+    }));
+  };
+
   const addToCart = (product) => {
+    const quantity = quantityByProduct[product.id] || 1; // ใช้ค่า quantity ที่กำหนดหรือ 1 หากไม่ได้กำหนด
     const existingProduct = cart.find((item) => item.id === product.id);
 
     let updatedCart;
@@ -54,9 +62,9 @@ function Products({ cart, setCart }) {
                 <p>${product.price}</p>
                 <input
                   type="number"
-                  value={quantity}
+                  value={quantityByProduct[product.id] || 1} // แสดงค่า quantity สำหรับสินค้านั้นๆ
                   min="1"
-                  onChange={(e) => setQuantity(Number(e.target.value))}
+                  onChange={(e) => handleQuantityChange(product.id, Number(e.target.value))}
                   className="quantity-input"
                 />
                 <button className="add-to-cart-btn" onClick={() => addToCart(product)}>
