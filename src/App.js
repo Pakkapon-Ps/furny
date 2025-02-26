@@ -7,6 +7,7 @@ import PaymentPage from "./pages/PaymentPage";
 import TrackingPage from "./pages/TrackingPage";
 import AdminPage from "./pages/AdminPage";
 import Auth from "./pages/Auth";
+import OrderHistoryPage from "./pages/OrderHistoryPage";
 
 function Navbar({ user, cart, setShowLogin }) {
   const navigate = useNavigate();
@@ -69,6 +70,7 @@ function App() {
         <Route path="/order" element={<OrderPage cart={cart} />} />
         <Route path="/payment" element={<PaymentPage />} />
         <Route path="/tracking" element={<TrackingPage />} />
+        <Route path="/order-history" element={<OrderHistoryPage />} />
         <Route path="/admin" element={user ? <AdminPage /> : <p>Please login to access Admin Page</p>} />
       </Routes>
 
@@ -172,7 +174,7 @@ function App() {
 
         .close-btn {
           position: absolute;
-          transform: translate(-50%, -40%); /* เคลื่อนที่ไปกลางกล่อง */
+          transform: translate(-51.5%, -30%); /* เคลื่อนที่ไปกลางกล่อง */
           background: none;
           border: none;
           font-size: 20px; /* ขนาดปุ่มเล็กลง */
